@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title> Happy Valentine - Bé Lợn </title>
+    <meta name="description" content="Happy Valentine's Day! A special gift for bé Lợn ">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Background sparkles layer -->
+        <div id="sparkles"></div>
+
+        <!-- Camera video (hidden) -->
+        <video id="camera" autoplay playsinline></video>
+
+        <!-- Main canvas for heart particles -->
+        <canvas id="heartCanvas"></canvas>
+
+        <!-- Text overlay -->
+        <div id="textOverlay">
+            <h1 class="title">Happy Valentine</h1>
+            <p class="subtitle"> Bé Lợn Minh Tâm</p>
+        </div>
+
+        <!-- Camera status indicator -->
+        <div id="cameraStatus">
+            <span id="cameraIcon">📷</span>
+            <span id="cameraText">Đang kết nối camera...</span>
+        </div>
+
+        <!-- Hand instruction -->
+        <div id="handInstruction">
+            ✋ Mở / nắm bàn tay để điều khiển trái tim
+        </div>
+
+        <!-- Click counter -->
+        <div id="clickCounter" class="click-counter"></div>
+
+        <!-- Tap instruction -->
+        <div id="tapInstruction">
+
+            💖 Chạm 3 lần vào trái tim để mở khóa bất ngờ
+        </div>
+    </div>
+
+    <!-- 💌 Love Letter Overlay -->
+    <div id="letterOverlay" class="letter-overlay hidden">
+        <div class="letter-falling-hearts" id="letterHearts"></div>
+        <div class="letter-container">
+            <div class="letter-envelope" id="letterEnvelope">
+                <div class="envelope-flap"></div>
+                <div class="envelope-body">
+                    <span class="envelope-heart">💌</span>
+                    <p class="envelope-text"> Một lá thư cho bé Lợn...</p>
+                </div>
+            </div>
+            <div class="letter-paper" id="letterPaper">
+                <div class="letter-content" id="letterContent">
+                    <p class="letter-greeting"> Dear bé Lợn Minh Tâm đáng iu nhất quả đất,</p>
+                    <br>
+                    <p class="letter-body">Cảm ơn em bé nhiều vì đã bước vào cuộc đời anh nhe. Yêu em bé nhiều lắm. Mặc
+                        dù valentine này anh hem được gần bé, mình hem được cùng nhau đón Lễ nhưng mà có gì sau Tết anh
+                        chở bé đi bù nhen. Anh yêu bé nhiều lắm, muốn ở bên bé nhiều nhiều để yêu thương bé hihi. Anh
+                        mong là dù thế nào, anh có thể cùng bé sửa lỗi và cùng nắm tay bé đi tiếp tiếp đến cùng nhen.
+                        Yêu thương bé nhiều.</p>
+                    <br>
+                    <p class="letter-closing"> Happy valentine cục dàng. 💖</p>
+                    <br>
+                    <div class="letter-signature">
+                        <span class="signature-heart">❤️</span>
+                        <span class="signature-text"> Từ người yêu bé Lợn</span>
+                    </div>
+                </div>
+                <div class="letter-tap-hint" id="letterTapHint">
+                    <span> Bé ơi chạm vào đây nè nè </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 💍 Ring Box Overlay -->
+    <div id="ringOverlay" class="ring-overlay hidden">
+        <div class="ring-sparkles" id="ringSparkles"></div>
+        <div class="ring-box-container">
+            <div class="ring-box" id="ringBox">
+                <div class="ring-box-lid" id="ringBoxLid">
+                    <div class="lid-top"></div>
+                </div>
+                <div class="ring-box-base">
+                    <div class="ring-cushion">
+                        <div class="ring">
+                            <!-- Diamond with prongs -->
+                            <div class="diamond-setting">
+                                <div class="prong prong-1"></div>
+                                <div class="prong prong-2"></div>
+                                <div class="prong prong-3"></div>
+                                <div class="prong prong-4"></div>
+                                <div class="prong prong-5"></div>
+                                <div class="prong prong-6"></div>
+                                <div class="diamond-stone">
+                                    <div class="diamond-facet facet-top"></div>
+                                    <div class="diamond-facet facet-left"></div>
+                                    <div class="diamond-facet facet-right"></div>
+                                    <div class="diamond-sparkle-dot s1"></div>
+                                    <div class="diamond-sparkle-dot s2"></div>
+                                    <div class="diamond-sparkle-dot s3"></div>
+                                </div>
+                            </div>
+                            <!-- Gold band -->
+                            <div class="ring-band-gold">
+                                <div class="band-highlight"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="proposal-text" id="proposalText">
+                <h2 class="proposal-question">Will you be my Valentine? 💖</h2>
+                <div class="proposal-buttons">
+                    <button class="proposal-btn yes-btn" id="yesBtn">Yes! </button>
+                    <button class="proposal-btn no-btn" id="noBtn"> Oh no...</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 📸 Photo Capture Overlay -->
+    <div id="photoOverlay" class="photo-overlay hidden">
+        <div class="photo-sparkles-bg" id="photoSparklesBg"></div>
+        <div class="photo-capture-container">
+            <h2 class="photo-title">📸 Chụp ảnh cùng chiếc nhẫn nào!</h2>
+            <p class="photo-subtitle">Chụp selfie hoặc chọn ảnh từ thư viện nhe bé </p>
+            <div class="camera-preview-wrapper">
+                <video id="selfieCamera" autoplay playsinline class="selfie-camera"></video>
+                <canvas id="selfieCanvas" class="selfie-canvas"></canvas>
+                <img id="previewImage" class="preview-image hidden" alt="Preview">
+            </div>
+            <div class="photo-buttons">
+                <button class="photo-btn snap-btn" id="snapBtn">📸 Chụp!</button>
+                <label class="photo-btn upload-btn" id="uploadBtn">
+                    📁 Chọn ảnh
+                    <input type="file" accept="image/*" id="fileInput" style="display:none">
+                </label>
+            </div>
+            <button class="photo-btn confirm-btn hidden" id="confirmPhotoBtn"> Dùng ảnh này </button>
+            <button class="photo-btn retake-btn hidden" id="retakeBtn"> Thui chụp lại</button>
+        </div>
+    </div>
+
+    <!-- 💖 Heart Photo Display Overlay -->
+    <div id="heartPhotoOverlay" class="heart-photo-overlay hidden">
+        <div class="heart-photo-bg-sparkles" id="heartPhotoBgSparkles"></div>
+        <div class="heart-photo-center">
+            <div class="big-heart-container">
+                <div class="big-heart-shape">
+                    <img id="heartPhotoImg" class="heart-photo-img" alt="Bé Lợn 💖">
+                </div>
+                <div class="orbiting-hearts" id="orbitingHearts"></div>
+            </div>
+            <p class="heart-photo-caption">Bé Lợn Valentine 💖 </p>
+        </div>
+    </div>
+
+    <!-- 🎵 Background Music (hidden YouTube iframe) -->
+    <div id="musicPlayer"
+        style="position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;overflow:hidden;pointer-events:none;">
+    </div>
+
+    <!-- MediaPipe Hands -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
